@@ -39,13 +39,13 @@ The following scripts will be involved in this project:
 ## Wireframes
 This game view will consist of a single screen with two icons in the upper right hand side corner. One icon will open an 'About' modal with my contact information. The second icon will open a Help modal with game instructions.
 
-**Splash Page**
+### Splash Page
 ![splash_page_img][splash_page]
 
-**? Modal**
+### ? Modal
 ![instructions][instructions]
 
-**Game View**
+### Game View
 ![game_view_img][game_view]
 
 

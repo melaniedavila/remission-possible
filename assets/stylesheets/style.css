@@ -18,7 +18,8 @@ ul {
   list-style: none;
 }
 
-/* STYLING */
+
+/* CANVAS STYLING */
 body {
   background: black;
 }
@@ -36,6 +37,9 @@ h1 {
   font-size: 50px;
   color: white;
 }
+
+
+/* FOOTER */
 
 ul {
   display: flex;
@@ -59,7 +63,10 @@ i {
   padding-right: 10px;
 }
 
-.start-modal {
+
+/* START MODAL */
+
+#start-modal {
   position: fixed;
   margin: 0 auto;
   background: black;
@@ -71,18 +78,18 @@ i {
   width: 800px;
 }
 
-.start-modal > h2, h3 {
+#start-modal > h2 {
   font-family: "Orbitron", sans-serif;
 }
 
-.start-modal > p {
+#start-modal > p {
   text-align: left;
   margin: 10px 20px 10px 20px;
   font-size: 19px;
   font-family: 'Titillium Web';
 }
 
-.start-modal > button {
+#start-modal > button {
   margin-top: 10px;
   margin-bottom: 15px;
   padding: 15px;
@@ -95,12 +102,46 @@ i {
   outline-color: #e2701e;
 }
 
-.start-modal > button:hover {
+#start-modal > button:hover {
   cursor: pointer;
 }
 
 .hidden {
   display: none;
-  /*opacity: 0;*/
-  /*pointer-events: */
+}
+
+
+/* HEALTH METER BAR */
+
+.canvas-and-health-meter-container {
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.health-meter-container {
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.health-meter-container > label {
+  font-family: 'Orbitron';
+  color: white;
+  text-align: left;
+}
+
+.health-meter-bar {
+  width: 250px;
+  height: 18px;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#health-level {
+  background-color: #41b916;
+  height: 18px;
 }

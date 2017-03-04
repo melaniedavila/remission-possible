@@ -58,3 +58,43 @@ li > a {
 i {
   padding-right: 10px;
 }
+
+.start-modal {
+  position: fixed;
+  margin: 0 auto;
+  background: black;
+  color: white;
+  text-align: center;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+}
+
+.start-modal > h2, h3 {
+  font-family: "Orbitron", sans-serif;
+}
+
+.start-modal > p {
+  text-align: left;
+  margin: 10px 20px 10px 20px;
+  font-size: 18px;
+  font-family: 'Titillium Web';
+}
+
+.start-modal > button {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 15px;
+  font-size: 14px;
+  background: #282d2d;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Orbitron", sans-serif;
+  outline-color: #e2701e;
+}
+
+.start-modal > button:hover {
+  cursor: pointer;
+}

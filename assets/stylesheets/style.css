@@ -64,9 +64,9 @@ i {
 }
 
 
-/* START & TRY AGAIN MODALS */
+/* START, WINNER & TRY AGAIN MODALS */
 
-#start-modal, #try-again-modal {
+#start-modal, #try-again-modal, #winner-modal {
   position: fixed;
   margin: 0 auto;
   background: black;
@@ -78,8 +78,13 @@ i {
   width: 800px;
 }
 
-#start-modal > h2, #try-again-modal  > h2 {
+#start-modal > h2, #try-again-modal  > h2,
+#winner-modal > h1, #winner-modal > h2 {
   font-family: "Orbitron", sans-serif;
+}
+
+#winner-modal {
+  padding: 30px 0 30px 0;
 }
 
 #start-modal > p {

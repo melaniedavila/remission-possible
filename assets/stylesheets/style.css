@@ -64,9 +64,9 @@ i {
 }
 
 
-/* START MODAL */
+/* START & TRY AGAIN MODALS */
 
-#start-modal {
+#start-modal, #try-again-modal {
   position: fixed;
   margin: 0 auto;
   background: black;
@@ -78,7 +78,7 @@ i {
   width: 800px;
 }
 
-#start-modal > h2 {
+#start-modal > h2, #try-again-modal  > h2 {
   font-family: "Orbitron", sans-serif;
 }
 
@@ -89,7 +89,14 @@ i {
   font-family: 'Titillium Web';
 }
 
-#start-modal > button {
+#try-again-modal  > p {
+  text-align: center;
+  margin: 10px 20px 10px 20px;
+  font-size: 19px;
+  font-family: 'Titillium Web';
+}
+
+#start-modal > button, #try-again-modal > button {
   margin-top: 10px;
   margin-bottom: 15px;
   padding: 15px;
@@ -102,7 +109,7 @@ i {
   outline-color: #e2701e;
 }
 
-#start-modal > button:hover {
+#start-modal > button:hover, #try-again-modal > button:hover {
   cursor: pointer;
 }
 
@@ -111,13 +118,15 @@ i {
 }
 
 
+
 /* HEALTH METER BAR */
 
-.canvas-and-health-meter-container {
+.canvas-and-meter-container {
   width: 800px;
   height: 600px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .health-meter-container {

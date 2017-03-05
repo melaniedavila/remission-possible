@@ -8,22 +8,34 @@
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
     <script type="application/javascript" src="lib/bundle.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
   </head>
   <body>
     <div class='title-wrapper'>
       <h1>(Re)Mission Possible</h1>
     </div>
-    <canvas id="canvas" width="800" height="600"></canvas>
-    <div class='start-modal'>
+    <div class='canvas-and-meter-container'>
+      <div class="health-meter-container">
+        <label>Health</label>
+        <div class="health-meter-bar">
+          <div id="health-level"></div>
+        </div>
+      </div>
+      <canvas id="canvas" width="800" height="600"></canvas>
+    </div>
+    <div id='start-modal'>
       <h2>Welcome, warrior.</h2>
       <p>Together, you and Yoko Hama the mouse ninja must kick some cancer butt.</p>
       <p>To beat a level, attach an antibody to each cancer cell.</p>
-      <h3>Instructions</h3>
+      <h2>Instructions</h2>
       <p>Move Yoko around the screen with your mouse. Click and hold while hovering over a yellow antibody to pick it up.</p>
       <p>Fling antibodies towards cancer cells by releasing your mouse click.</p>
       <p>Don't let Yoko touch the cancer cells. If her health is depleted, you will have to restart the level.</p>
-      <button class='start-button'>I'm Ready For Battle!</button>
+      <button id='start-button'>I'm Ready For Battle!</button>
+    </div>
+    <div id='try-again-modal' class='hidden'>
+      <h2>Uh-oh</h2>
+      <p>Our ninja friend Yoko's health was depleted.</p>
+      <button id='try-again-button'>Try again?</button>
     </div>
     <ul>
       <li id='name'>Melanie Davila</li>

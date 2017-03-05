@@ -129,14 +129,17 @@ i {
   margin-bottom: 10px;
 }
 
-.health-meter-container {
+.health-meter-and-level-container {
   padding: 15px;
   position: absolute;
   bottom: 0;
   left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 760px;
 }
 
-.health-meter-container > label {
+.health-meter-label-and-bar > label {
   font-family: 'Orbitron';
   color: white;
   text-align: left;
@@ -153,4 +156,12 @@ i {
 #health-level {
   background-color: #41b916;
   height: 18px;
+}
+
+/* GAME LEVEL INDICATOR */
+
+#level {
+  font-family: 'Orbitron';
+  color: white;
+  text-transform: uppercase;
 }

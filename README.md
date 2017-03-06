@@ -1,86 +1,101 @@
 # (Re)Mission Possible
-## Background
 (Re)Mission Possible is an antibody-flinging, cancer butt-kicking game inspired by the neuroblastoma team and pediatric oncology patients at Memorial Sloan Kettering Cancer Center.
 
-In this one-player game, the player controls a friendly mouse ninja named Yoko Hama with their mouse. Together, Yoko Hama and the player must complete 5 levels. In order to beat a level, the player must attach an antibody (hu3F8) to every cancer cell by picking up an antibody with their mouse and flinging it towards the cancer cell. Once this has been complete, immune system cells will come to wipe away the cancer cells and the player will advance to the next level.
+[Live Version](http://melaniedavila.com/remission-possible/)
+![screenshot_img][screenshot]
 
-As the levels progress, there will be more cancer cells to beat. Beginning at level 3, a helpful drug (GM-CSF) will appear randomly. The player may capture and store this drug. They may use it at any time to summon the immune system to aggressively clear cancer cells from the screen.
-
-## Functionality and MVP
-While playing (Re)Mission Possible, users will be able to:
-- [ ] Control Yoko with their cursor
-- [ ] Hold antibodies by clicking when Yoko comes in contact with antibody
-- [ ] Fling antibodies at cancer cells by releasing the click
-- [ ] Take damage when Yoko comes into contact with a cancer cell
-- [ ] Restart the level if Yoko's health is depleted
-- [ ] Store a helpful immune system boosting drug by clicking when Yoko comes into contact with the drug
-- [ ] Release the drug from the store by hitting the space bar
-
-In addition, this project will include:
-- [ ] A series of introductory modals including the rules of the game. Users will have the option to skip the introduction.
-- [ ] An 'About' modal including my contact information
-- [ ] A production README
+## Instructions
+In this one-player game, the player controls a friendly mouse ninja named Yoko Hama with their mouse. Together, Yoko Hama and the player must complete 3 levels. In order to beat a level, the player must attach an antibody to every cancer cell by picking up an antibody with their mouse and flinging it towards the cancer cell. Once this has been complete, immune system cells will come to wipe away the cancer cells and the player will advance to the next level.
 
 ## Architecture & Technologies
-- [ ] Vanilla Javascript for overall structure and game logic
-- [ ] `Easel.js` with `HTML5 Canvas` for DOM manipulation and rendering
-- [ ] HTML/CSS for modal content and styling
-- [ ] Webpack
 
-The following scripts will be involved in this project:
-- `game_view.js`: this script will handle the logic for creating and updating the necessary `Easel.js` elements and rendering them to the DOM.
-- `game.js`: this script will handle the game logic. It will also keep track of any available drug boost in a variable with a boolean value.
-- `yoko.js`: this script will handle player movement logic. It will also keep track of any attachments (i.e. antibody).
-- `antibody.js`: this script will handle antibody movement logic.
-- `cancer_cell.js`: this script will handle cancer cell movement logic. It will also keep track of any attachments (i.e. antibody).
-- `drug_boost.js`: this script will handle drug boost movement logic.
+The [Easel.js](http://www.createjs.com/easeljs) component of the Create.js library was used to facilitate DOM manipulation and rendering. All moving objects (antibodies, cancer cells, immune system cells, Yoko Hama) include a create.js Bitmap object as a representation of their shape.
+
+``` javascript
+  createCancerCellShape() {
+    const cancerCellBitmap = new createjs.Bitmap(cancerCellImagePath);
+    cancerCellBitmap.radius = this.radius;
+    cancerCellBitmap.prevX = cancerCellBitmap.x;
+    cancerCellBitmap.prevY = cancerCellBitmap.y;
+    return cancerCellBitmap;
+  }
+```
+
+## Features and Implementation
+
+### Collision Detection
+All moving objects of the have bitmap components representing their shape as bitmap object with a radius attribute. Because of this, three different types of collisions implement the same collision logic:
+- Antibody- Cancer Cell
+- Yoko Hama- Cancer Cell
+- Immune System Cell- Cancer Cell
+
+``` javascript
+areCollided(obj1, obj2) {
+  const dx = obj1.shape.x - obj2.shape.x;
+  const dy = obj1.shape.y - obj2.shape.y;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  return distance < obj1.radius + obj2.radius;
+}
+```
+
+### Correlation of Antibody Velocity with Mouse Release Velocity
+Event listeners are bound to the createjs.Ticker upon both mouse click and release. Velocity calculations are implemented in the 'pressup' (mouse release) event listener to ensure that the antibody velocity is correlated to the velocity of the mouse movement upon click release.
+
+``` javascript
+addEventListeners() {
+  this.shape.on('pressmove', function (evt) {
+    if (this.boundTickEventListener) {
+      createjs.Ticker.removeEventListener('tick', this.boundTickEventListener);
+      this.boundTickEventListener = null;
+    }
+
+    this.shape.prevX = this.shape.x;
+    this.shape.prevY = this.shape.y;
+    this.shape.x = evt.stageX % 800;
+    this.shape.y = evt.stageY % 600;
+  }.bind(this)).bind(this);
+
+  this.shape.on("pressup", function(evt) {
+    this.dx = this.shape.x - this.shape.prevX;
+    this.dy = this.shape.y - this.shape.prevY;
+    this.flung = true;
+
+    if (!this.boundTickEventListener) {
+      this.boundTickEventListener = this.tickEventListener.bind(this)
+      createjs.Ticker.addEventListener('tick', this.boundTickEventListener);
+    }
+
+  }.bind(this));
+}
+
+tickEventListener() {
+  this.shape.x = moduloWrap(this.shape.x + this.dx/4, 800);
+  this.shape.y = moduloWrap(this.shape.y + this.dy/4, 600);
+
+  if (this.shape.rotation === 359) {
+    this.shape.rotation = 0
+  } else {
+    this.shape.rotation += 1
+  }
+}
+```
 
 
-## Wireframes
-This game view will consist of a single screen with two icons in the upper right hand side corner. One icon will open an 'About' modal with my contact information. The second icon will open a Help modal with game instructions.
+### Styling
+The game's meters, header, modals, and footer were styled using vanilla CSS. HTML DOM elements were manipulated with the HTML DOM's native functions in order to avoid extra bulk from using jQuery.
 
-### Splash Page
-![splash_page_img][splash_page]
+Below, Yoko Hama's health bar is updated when she takes damage.
 
-### ? Modal
-![instructions][instructions]
+``` javascript
+updateHealthMeter() {
+  document.getElementById('health-level').style.width = `${ this.yoko.health / 10 }px`;
+}
+```
 
-### Game View
-![game_view_img][game_view]
-
-
-## Implementation Timeline
-**Phase I**: Basic set up and skeleton
-- [ ] Setup all necessary Node modules
-- [ ] Setup `Easel.js`.
-- [ ] Create `webpack.config.js` and `package.json` files.
-- [ ] Write a basic entry file
-- [ ] Create a skeleton for all 6 scripts mentioned in the Architecture & Technologies section.
-
-**Phase II**: Learn and use the `Easel.js` API. Complete scripts.
-- [ ] Build the following objects to connect to the `GameView` object
-  - [ ] `Yoko`
-  - [ ] `Antibody`
-  - [ ] `CancerCell`
-  - [ ] `DrugBoost`
-- [ ] Render the objects listed above to the `Canvas` element
-- [ ] Make each antibody and drug boost in the `GameView ` clickable
-- [ ] Complete all 6 scripts mentioned in the Architecture & Technologies section.
-- [ ] Ensure the `Canvas` successfully handles transitions from one level to the next.
-
-**Phase III**: Style the frontend and modals.
-- [ ] Style the `Canvas` with a nice looking title.
-- [ ] Complete 'About' modal
-- [ ] Complete 'Help' modal
-- [ ] Complete 'Instructions' modals for each level.
-
-## Bonus features
-Future directions for the project include:
+## Future Directions for the Project
 - [ ] Music and sound effects
 - [ ] Addition of more levels
 - [ ] Options for difficulty level
 
 
-[game_view]: docs/wireframes/game_view.png
-[instructions]: docs/wireframes/instructions.png
-[splash_page]: docs/wireframes/splash_page.png
+[screenshot]: docs/screenshots/level_1.png

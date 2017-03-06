@@ -2,6 +2,7 @@
 (Re)Mission Possible is an antibody-flinging, cancer butt-kicking game inspired by the neuroblastoma team and pediatric oncology patients at Memorial Sloan Kettering Cancer Center.
 
 [Live Version](http://melaniedavila.com/remission-possible/)
+
 ![screenshot_img][screenshot]
 
 ## Instructions

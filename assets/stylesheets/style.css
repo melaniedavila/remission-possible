@@ -116,13 +116,13 @@ i {
 
 #start-modal > button:hover, #try-again-modal > button:hover {
   cursor: pointer;
+  background: #222626;
+  transition: background 0.3s ease;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
-
-
 
 /* HEALTH METER BAR */
 
@@ -169,4 +169,21 @@ i {
   font-family: 'Orbitron';
   color: white;
   text-transform: uppercase;
+}
+
+/* MUSIC TOGGLE */
+
+.music-toggle {
+  margin: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  color: white;
+}
+
+.music-toggle > i {
+  cursor: pointer;
 }

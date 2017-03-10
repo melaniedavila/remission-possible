@@ -124,6 +124,7 @@ i {
   display: none !important;
 }
 
+
 /* HEALTH METER BAR */
 
 .canvas-and-meter-container {
@@ -163,6 +164,7 @@ i {
   height: 18px;
 }
 
+
 /* GAME LEVEL INDICATOR */
 
 #level {
@@ -170,6 +172,7 @@ i {
   color: white;
   text-transform: uppercase;
 }
+
 
 /* MUSIC TOGGLE */
 

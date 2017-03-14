@@ -22,7 +22,7 @@ The [Easel.js](http://www.createjs.com/easeljs) component of the Create.js libra
   }
 ```
 
-## Features and Implementation
+## Features & Implementation
 
 ### Collision Detection
 All moving objects of the have bitmap components representing their shape as bitmap object with a radius attribute. Because of this, three different types of collisions implement the same collision logic:
@@ -93,8 +93,23 @@ updateHealthMeter() {
 }
 ```
 
+
+### Music & Sound Effects
+The game's music and sound effects were implemented via JavaScript's native Audio class.
+
+Below is an example from the GameView class:
+
+``` javascript
+setUpMusic() {
+  this.music = new Audio('./assets/sounds/background.mp3');
+  this.music.loop = true;
+  this.playMusic();
+}
+```
+
+
 ## Future Directions for the Project
-- [ ] Music and sound effects
+- [X] Music and sound effects
 - [ ] Addition of more levels
 - [ ] Options for difficulty level
 

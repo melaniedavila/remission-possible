@@ -113,5 +113,4 @@ setUpMusic() {
 - [ ] Addition of more levels
 - [ ] Options for difficulty level
 
-
-[screenshot]: docs/screenshots/level_1.png
+[screenshot]: docs/screenshots/level_2.png
